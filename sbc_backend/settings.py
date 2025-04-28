@@ -27,7 +27,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
-
+CSRF_TRUSTED_ORIGINS = [
+    'https://sbc-4at2.onrender.com',
+    'http://sbc-4at2.onrender.com',  # optional, in case Render uses HTTP internally sometimes
+]
 # Application definition
 
 INSTALLED_APPS = [
