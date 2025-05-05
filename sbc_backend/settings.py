@@ -34,7 +34,10 @@ CSRF_TRUSTED_ORIGINS = [
 # Application definition
 
 INSTALLED_APPS = [
-    'jazzmin',
+    
+    'rest_framework',
+    'rest_framework_simplejwt',
+    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -50,6 +53,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -60,6 +64,20 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'sbc_backend.urls'
+
+
+# Allow frontend domain
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:4200",  # Angular dev server
+]
+
+# DRF and JWT settings
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
+
 
 TEMPLATES = [
     {
@@ -131,12 +149,3 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-JAZZMIN_SETTINGS = {
-    "site_title": "SBCS",
-    "site_header": "SBCS ADMIN",           # This will replace "Django Administration"
-    "site_brand": "SBCS",              # Top-left corner text# Optional: your logo on login page
-    "login_logo_dark": None, # Logo at the top
-    "welcome_sign": "Welcome to SBCS",      # Login page welcome text
-    "copyright": "SBCS",
-    # You can add even more options if needed
-}
