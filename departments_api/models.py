@@ -1,14 +1,14 @@
 from django.db import models
 
-from colleges_api.models import College
-from django.contrib.auth.models import User
 
+from django.contrib.auth.models import User
+from django.conf import settings
 # Create your models here.
 
 class Department(models.Model):
     name = models.CharField(max_length=255)
-    hod = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='departments_hod')
-    college = models.ForeignKey(College, on_delete=models.CASCADE, related_name='departments')
+    hod = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True, related_name='departments_hod')
+   
 
     def __str__(self):
         return self.name

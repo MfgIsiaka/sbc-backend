@@ -38,18 +38,18 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'corsheaders',
+    'users_api',
+    'programs_api',
+    'courses_api',
+    'departments_api',
+    'course_teacher_api',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'users_api',
-    'colleges_api',
-    'programs_api',
-    'courses_api',
-    'departments_api',
-    'course_teacher_api'
+    'django.contrib.staticfiles'
+    
 ]
 
 MIDDLEWARE = [
@@ -78,6 +78,7 @@ REST_FRAMEWORK = {
     ),
 }
 
+AUTH_USER_MODEL = 'users_api.CustomUser'
 
 TEMPLATES = [
     {
