@@ -68,7 +68,7 @@ ROOT_URLCONF = 'sbc_backend.urls'
 
 # Allow frontend domain
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:4200",  # Angular dev server
+    "http://localhost:4200",  
 ]
 
 # DRF and JWT settings
