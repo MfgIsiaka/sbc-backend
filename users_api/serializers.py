@@ -14,8 +14,6 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         token['email'] = user.email
         token['id'] = user.id
         token['role'] = user.role
-        # If you have roles/groups
-        # token['role'] = user.groups.first().name if user.groups.exists() else 'user'
         return token
 
     def validate(self, attrs):
@@ -32,11 +30,28 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
 
 
 # USER SERIALIZER
-
 class CustomUserSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True)  
+
     class Meta:
         model = CustomUser
-        fields = '__all__'
+        fields = '__all__'  
+
+    def create(self, validated_data):
+        password = validated_data.pop('password') 
+        user = CustomUser(**validated_data)
+        user.set_password(password)  
+        user.save()
+        return user
+
+    def update(self, instance, validated_data):
+        password = validated_data.pop('password', None)  
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+        if password:
+            instance.set_password(password)  
+        instance.save()
+        return instance
 
 class ProfileSerializer(serializers.ModelSerializer):
 
